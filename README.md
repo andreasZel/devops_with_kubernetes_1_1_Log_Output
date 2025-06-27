@@ -17,3 +17,13 @@ kubectl get pods
 kubectl logs logoutput-9c7974789-7h6h9 # logoutput-9c7974789-7h6h9 was my pod name
 ```
 
+
+## For Declerative approach
+
+Use the .yml file by executing:
+
+```bash
+kubectl apply -f manifest/Deployment.yml
+```
+
+and repeating the next steps to get the logs.
