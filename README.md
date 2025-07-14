@@ -27,3 +27,13 @@ kubectl apply -f manifest/Deployment.yml
 ```
 
 and repeating the next steps to get the logs.
+
+## Update 1.7
+
+Now an endpolint `http://localhost:8081/status` exist. We used an Ingress a **ClusterIP** service to forward 2345 port to 3000 and then use Ingress to pass traffic to 2345.
+
+The port 80 should be mapped to 8081 in the cluster, so create a new one:
+
+```bash
+k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
+```
