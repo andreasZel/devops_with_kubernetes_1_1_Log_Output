@@ -37,3 +37,7 @@ The port 80 should be mapped to 8081 in the cluster, so create a new one:
 ```bash
 k3d cluster create --port 8082:30080@agent:0 -p 8081:80@loadbalancer --agents 2
 ```
+
+## Update 1.9
+
+Now a new endpoint listens to `/pingpong` by adding a new ClusterIP Service and a new Deployment
