@@ -12,6 +12,17 @@ spec:
         labels:
             app: logoutput
       spec:
+        volumes: 
+        - name: shared-logs
+          emptyDir: {}
         containers:
         - name: logoutput
-          image: zelhs/randomstring
+          image: zelhs/randomstring:1.10
+          volumeMounts: 
+          - name: shared-logs
+            mountPath: '/usr/app/logs'
+        - name: readlogs
+          image: zelhs/readlogs
+          volumeMounts: 
+          - name: shared-logs
+            mountPath: '/usr/app/logs'
