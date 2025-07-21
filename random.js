@@ -1,10 +1,24 @@
 #!/usr/bin/env node
 const http = require("http");
 const crypto = require("crypto");
+const fs = require("fs");
 const id = crypto.randomBytes(20).toString('hex');
+var logString = '';
 
 setInterval(() => {
-    console.log(`${new Date().toISOString()}: ${id}`)
+    try {
+        logString = `${new Date().toISOString()}: ${id}`;
+
+        fs.writeFile('./text.logs', logString, 'utf8', (err) => {
+            if (err) {
+                console.error('Error writing file:', err);
+                return;
+            }
+            console.log('File written successfully!');
+        });
+    } catch(e) {
+        console.log(e);
+    }
 }, 5e3);
 
 const server = http.createServer((req, res) => {
