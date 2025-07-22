@@ -4,6 +4,7 @@ const fs = require("node:fs/promises");
 const path = require('path');
 
 const logPath = path.join(__dirname, 'logs', 'text.logs');
+const logCounterPath = path.join(__dirname, 'logs', 'counter.txt');
 
 const server = http.createServer(async (req, res) => {
 
@@ -12,8 +13,9 @@ const server = http.createServer(async (req, res) => {
             res.writeHead(200, { 'Content-Type': 'text/plain' });
 
             const result = await fs.readFile(logPath, 'utf8');
+            const resultCounter = await fs.readFile(logCounterPath, 'utf8');
 
-            res.write(result);
+            res.write(`${result}.\nPing / Pongs:${resultCounter}`);
             res.end();
         } catch (e) {
             console.log(e);
