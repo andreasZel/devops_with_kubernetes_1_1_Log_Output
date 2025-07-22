@@ -14,7 +14,8 @@ spec:
       spec:
         volumes: 
         - name: shared-logs
-          emptyDir: {}
+          persistentVolumeClaim:
+            claimName: shared-logs-pv-claim
         containers:
         - name: logoutput
           image: zelhs/randomstring:1.10
@@ -22,7 +23,12 @@ spec:
           - name: shared-logs
             mountPath: '/usr/app/logs'
         - name: readlogs
-          image: zelhs/readlogs
+          image: zelhs/readlogs:1.11
+          volumeMounts: 
+          - name: shared-logs
+            mountPath: '/usr/app/logs'
+        - name: ping-pong
+          image: zelhs/ping-pong-application:1.11
           volumeMounts: 
           - name: shared-logs
             mountPath: '/usr/app/logs'

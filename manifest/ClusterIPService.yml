@@ -7,6 +7,11 @@ spec:
   selector:
     app: logoutput
   ports:
-    - port: 2345
+    - name: readstringport
+      port: 2345
       protocol: TCP
       targetPort: 3000
+    - name: pingpongport
+      port: 2020
+      protocol: TCP
+      targetPort: 3003
