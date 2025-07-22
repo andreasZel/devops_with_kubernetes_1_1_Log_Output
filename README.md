@@ -45,3 +45,15 @@ Now a new endpoint listens to `/pingpong` by adding a new ClusterIP Service and 
 ## update 1.10
 
 Now a new endpoint listens to `localhost:8081/getString`. 
+
+## update 1.11
+
+1. Make sure `/tmp/kube` exist in **k3d-k3s-default-agent-0**
+
+2. You need to apply the Persistent volumes and persistent volume Claims in addition to the deployment
+
+        so run 
+
+        ```bash
+        kubectl apply -f manifest -f persistentVolumes
+        ```
