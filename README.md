@@ -57,3 +57,12 @@ Now a new endpoint listens to `localhost:8081/getString`.
         ```bash
         kubectl apply -f manifest -f persistentVolumes
         ```
+
+## update 2.3
+
+We seperated the app's resources in our cluster using namespace `
+exercises`, so you also have to create a namespace:
+
+```bash
+kubectl create namespace exercises
+```
