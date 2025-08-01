@@ -28,7 +28,7 @@ const server = http.createServer(async (req, res) => {
 
     if (req?.method === 'GET' && req.url === '/') {
         try {
-            const pings = await fetch('http://ping-pong-svc:2020/pings');
+            const pings = await fetch('http://ping-pong-svc.exercises:2020/pings');
             const pingsText = await pings.text();
             res.write(`${logString}.\n${pingsText}`);
            
