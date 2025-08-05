@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 const crypto = require("crypto");
 const http = require("http");
-// const fs = require("fs");
-// const path = require('path');
+const fs = require("fs/promises");
+const path = require('path');
 const id = crypto.randomBytes(20).toString('hex');
 var logString = '';
 
-// const logPath = path.join(__dirname, 'logs', 'text.logs');        
+const logPath = path.join(__dirname, 'information', 'information.txt');
 
 setInterval(() => {
     try {
@@ -30,8 +30,17 @@ const server = http.createServer(async (req, res) => {
         try {
             const pings = await fetch('http://ping-pong-svc.exercises:2020/pings');
             const pingsText = await pings.text();
-            res.write(`${logString}.\n${pingsText}`);
-           
+            const infoText = await fs.readFile(logPath, 'utf8');
+            var infoMessageParsed = '';
+            try {
+                const match = infoText.match(/message="([^"]*)"/);
+                if (match) infoMessageParsed = match[1];
+            } catch (e) {
+                console.log(e);
+            }
+
+            res.write(`file content: ${infoMessageParsed}.\n${logString}.\n${pingsText}`);
+
             res.end();
         } catch (e) {
             console.log(e);
