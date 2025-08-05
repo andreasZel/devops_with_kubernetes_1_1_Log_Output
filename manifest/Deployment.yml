@@ -13,6 +13,14 @@ spec:
         labels:
             app: logoutput
       spec:
+        volumes:
+        - name: config-volume
+          configMap:
+            name: logoutput-configmap
         containers:
         - name: logoutput
-          image: zelhs/randomstring:2.3
+          image: zelhs/randomstring:2.5
+          volumeMounts: 
+            - name: config-volume
+              mountPath: /usr/app/information
+              readOnly: true

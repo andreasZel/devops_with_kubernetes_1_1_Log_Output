@@ -6,13 +6,13 @@ metadata:
 spec:
   replicas: 1
   selector:
-      matchLabels:
-        app: ping-pong
+    matchLabels:
+      app: ping-pong
   template:
-      metadata:
-        labels:
-            app: ping-pong
-      spec:
-        containers:
+    metadata:
+      labels:
+        app: ping-pong
+    spec:
+      containers:
         - name: ping-pong
           image: zelhs/ping-pong-application:2.1
