@@ -66,3 +66,12 @@ exercises`, so you also have to create a namespace:
 ```bash
 kubectl create namespace exercises
 ```
+
+## update 2.7
+
+Added a db to save the pings counter. For that a `statefulset` service was added. You keed to first apply this,
+with it secrets and headless service by:
+
+```bash
+kubectl apply -f porsgresServices -f manifest
+```
