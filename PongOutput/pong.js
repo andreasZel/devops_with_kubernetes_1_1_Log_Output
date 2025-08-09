@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-const http = require("http");
-// const fs = require("fs");
-// const path = require('path');
-// var counter = 0;
+import http from 'http';
+import dotenv from 'dotenv';
+import pkg from 'pg';
+const { Pool } = pkg;
+
+dotenv.config();
 var logString = '';
-require('dotenv').config();
-const { Pool } = require('pg');
 
 // const logPath = path.join(__dirname, 'logs', 'counter.txt');   
 
@@ -50,6 +50,7 @@ const server = http.createServer(async (req, res) => {
     if (req?.method === 'GET' && req.url === '/pingpong') {
         try {
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
 
             if (pingsDbResult?.rows?.length === 0) {
                 res.write(`No pong yet`);
@@ -68,7 +69,6 @@ const server = http.createServer(async (req, res) => {
             //     console.log(`File written successfully in ${logPath}!`);
             // });
 
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end();
         } catch (e) {
             console.log(e);
@@ -80,6 +80,8 @@ const server = http.createServer(async (req, res) => {
     } else if (req?.method === 'GET' && req.url === '/pings') {
 
         try {
+            
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
             if (pingsDbResult?.rows?.length === 0) {
                 res.write(`No Ping / Pongs yet`);
@@ -89,7 +91,6 @@ const server = http.createServer(async (req, res) => {
                 res.write(logString);
             }
             
-            res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end();
         } catch (e) {
             console.log(e);
