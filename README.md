@@ -75,3 +75,29 @@ with it secrets and headless service by:
 ```bash
 kubectl apply -f porsgresServices -f manifest
 ```
+
+## update 3.1
+
+If you use GKE
+
+create a cluster:
+
+```bash
+# i'm in greece, you can choose other zone
+gcloud container clusters create dwk-cluster --zone=europe-west1-b --cluster-version=latest --disk-size=32 --num-nodes=3 --machine-type=e2-medium
+```
+
+create the **exercises** namespace again
+
+```bash
+kubectl create namespace exercises
+```
+
+and then you have to apply each of the resources individualy, specifying the latest commit as:
+
+```bash
+kubectl apply -f https://raw.githubusercontent.com/andreasZel/devops_with_kubernetes_1_1_Log_Output/fd9e072b39d69535cb892c1623879d334f3ecee6/manifest/ConfigMap.yml
+```
+
+if errors with statefull set occurs delete it with the corresponding storage class if it exist.
+
