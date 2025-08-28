@@ -1,9 +1,10 @@
 apiVersion: networking.k8s.io/v1
-kind: LoadBalancer
+kind: Service
 metadata:
   namespace: exercises
   name: logoutput-ingress
 spec:
+  type: LoadBalancer
   rules:
   - http:
       paths:
