@@ -47,7 +47,10 @@ const dbpool = await dbInitAndConnect();
 
 const server = http.createServer(async (req, res) => {
 
-    if (req?.method === 'GET' && req.url === '/pingpong') {
+    if (req?.method === 'GET' && req.url === '/') {
+        res.write();
+        res.end();
+    } else if (req?.method === 'GET' && req.url === '/increasePingPongs') {
         try {
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
             res.writeHead(200, { 'Content-Type': 'text/plain' });
@@ -80,7 +83,7 @@ const server = http.createServer(async (req, res) => {
     } else if (req?.method === 'GET' && req.url === '/pings') {
 
         try {
-            
+
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
             if (pingsDbResult?.rows?.length === 0) {
@@ -90,7 +93,7 @@ const server = http.createServer(async (req, res) => {
                 logString = `Ping / Pongs: ${counter}`;
                 res.write(logString);
             }
-            
+
             res.end();
         } catch (e) {
             console.log(e);
