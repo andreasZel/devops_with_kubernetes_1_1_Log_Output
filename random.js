@@ -27,6 +27,9 @@ setInterval(() => {
 const server = http.createServer(async (req, res) => {
 
     if (req?.method === 'GET' && req.url === '/') {
+        res.write();
+        res.end();
+    } else if (req?.method === 'GET' && req.url === '/pingpong') {
         try {
             const pings = await fetch('http://ping-pong-svc.exercises:2020/pings');
             const pingsText = await pings.text();
