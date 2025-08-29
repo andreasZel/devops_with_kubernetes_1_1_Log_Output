@@ -19,7 +19,7 @@ spec:
             name: logoutput-configmap
         containers:
         - name: logoutput
-          image: zelhs/randomstring:2.7
+          image: zelhs/randomstring:3.2
           volumeMounts: 
             - name: config-volume
               mountPath: /usr/app/information

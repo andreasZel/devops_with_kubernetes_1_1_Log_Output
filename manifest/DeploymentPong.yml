@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: zelhs/ping-pong-application:2.7
+          image: zelhs/ping-pong-application:3.2
           env:
             - name: POSTGRES_USER
               valueFrom:
