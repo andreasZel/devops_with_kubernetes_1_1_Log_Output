@@ -101,3 +101,17 @@ kubectl apply -f https://raw.githubusercontent.com/andreasZel/devops_with_kubern
 
 if errors with statefull set occurs delete it with the corresponding storage class if it exist.
 
+## update 3.3
+
+You need to create or update the cluster to use Gateway API by:
+
+```bash
+gcloud container clusters create dwk-cluster --zone=europe-west1-b --cluster-version=latest --disk-size=32 --num-nodes=3 --machine-type=e2-medium --gateway-api=standard
+```
+
+or
+
+```bash
+gcloud container clusters update dwk-cluster --location=europe-west1-b --gateway-api=standard
+```
+
