@@ -18,7 +18,6 @@ spec:
           path:
             type: ReplacePrefixMatch
             replacePrefixMatch: /pingpong
-          statusCode: 302
     backendRefs:
       - name: logoutput-svc
         port: 2345
