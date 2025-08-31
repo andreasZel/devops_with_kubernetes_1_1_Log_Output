@@ -48,8 +48,8 @@ const dbpool = await dbInitAndConnect();
 const server = http.createServer(async (req, res) => {
 
     if (req?.method === 'GET' && req.url === '/') {
-        res.write();
-        res.end();
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end("OK"); 
     } else if (req?.method === 'GET' && req.url === '/increasePingPongs') {
         try {
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
