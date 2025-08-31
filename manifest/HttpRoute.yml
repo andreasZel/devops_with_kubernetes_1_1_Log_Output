@@ -16,8 +16,8 @@ spec:
       - type: RequestRedirect
         requestRedirect:
           path:
-            type: ReplaceFullPath
-            replaceFullPath: /pingpong
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /pingpong
           statusCode: 302
   - matches:
     - path:
