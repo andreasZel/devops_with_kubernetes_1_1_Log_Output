@@ -29,7 +29,7 @@ const server = http.createServer(async (req, res) => {
     if (req?.method === 'GET' && req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end("OK"); 
-    } else if (req?.method === 'GET' && req.url === '/pingpong') {
+    } else if (req?.method === 'GET' && req.url.startsWith('/pingpong')) {
         try {
             const pings = await fetch('http://ping-pong-svc.exercises:2020/pings');
             const pingsText = await pings.text();
