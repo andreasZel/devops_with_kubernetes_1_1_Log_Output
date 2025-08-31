@@ -115,3 +115,4 @@ or
 gcloud container clusters update dwk-cluster --location=europe-west1-b --gateway-api=standard
 ```
 
+also use the commit code `85b6e486b62227908fa163e05f4b81ddce68fd14` to apply resources.
