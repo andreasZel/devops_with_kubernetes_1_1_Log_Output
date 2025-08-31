@@ -11,13 +11,13 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /pingpong
+        value: /
     filters:
       - type: RequestRedirect
         requestRedirect:
           path:
             type: ReplacePrefixMatch
-            replacePrefixMatch: /
+            replacePrefixMatch: /pingpong
           statusCode: 302
   - matches:
     - path:
