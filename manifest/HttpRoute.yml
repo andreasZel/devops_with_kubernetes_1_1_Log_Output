@@ -10,7 +10,7 @@ spec:
   rules:
   - matches:
     - path:
-        type: PathPrefix
+        type: Exact
         value: /
     filters:
       - type: RequestRedirect
