@@ -12,16 +12,13 @@ spec:
     - path:
         type: PathPrefix
         value: /pingpong
-    backendRefs:
-    - name: logoutput-svc
-      port: 2345
     filters:
-        - type: RequestRedirect
-          requestRedirect:
-            path:
-              type: ReplacePrefixMatch
-              replacePrefixMatch: /
-            statusCode: 302
+      - type: RequestRedirect
+        requestRedirect:
+          path:
+            type: ReplacePrefixMatch
+            replacePrefixMatch: /
+          statusCode: 302
   - matches:
     - path:
         type: PathPrefix
