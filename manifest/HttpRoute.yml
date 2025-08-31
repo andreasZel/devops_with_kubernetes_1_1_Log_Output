@@ -24,8 +24,8 @@ spec:
       port: 2020
   - matches:
     - path:
-        type: RegularExpression
-        value: ^/$
+        type: PathPrefix
+        value: /
     filters:
       - type: URLRewrite
         urlRewrite:
