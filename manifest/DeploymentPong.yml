@@ -15,7 +15,13 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: zelhs/ping-pong-application:3.2
+          image: zelhs/ping-pong-application:4.1
+          readinessProbe:
+            initialDelaySeconds: 10 
+            periodSeconds: 5 
+            httpGet:
+               path: /healthz
+               port: 3003
           env:
             - name: POSTGRES_USER
               valueFrom:

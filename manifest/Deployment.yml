@@ -19,7 +19,13 @@ spec:
             name: logoutput-configmap
         containers:
         - name: logoutput
-          image: zelhs/randomstring:3.3
+          image: zelhs/randomstring:4.1
+          readinessProbe:
+            initialDelaySeconds: 10 
+            periodSeconds: 5 
+            httpGet:
+               path: /healthz
+               port: 3004
           volumeMounts: 
             - name: config-volume
               mountPath: /usr/app/information

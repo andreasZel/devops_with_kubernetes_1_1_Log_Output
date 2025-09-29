@@ -28,7 +28,22 @@ const server = http.createServer(async (req, res) => {
 
     if (req?.method === 'GET' && req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end("OK"); 
+        res.end("OK");
+    } else if (req.method === 'GET' && req.url === '/healthz') {
+        try {
+            const pingpong = await fetch('http://ping-pong-svc.exercises:2020/');
+            if (pingpong.ok) {
+                res.writeHead(200, { 'Content-Type': 'text/plain' });
+                res.end('OK');
+                return;
+            }
+
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Ping-pong not reachable');
+        } catch (e) {
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end('Ping-pong not reachable');
+        }
     } else if (req?.method === 'GET' && req.url.startsWith('/pingpong')) {
         try {
             const pings = await fetch('http://ping-pong-svc.exercises:2020/pings');

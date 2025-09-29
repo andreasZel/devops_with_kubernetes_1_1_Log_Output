@@ -49,7 +49,17 @@ const server = http.createServer(async (req, res) => {
 
     if (req?.method === 'GET' && req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end("OK"); 
+        res.end("OK");
+    } else if (req?.method === 'GET' && req.url === '/healthz') {
+        if (dbpool) {
+            res.writeHead(200, { 'Content-Type': 'text/plain' });
+            res.end("OK");
+            return;
+        }
+
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.write(`Error connecting to Db`);
+        res.end("Error connecting to Db");
     } else if (req?.method === 'GET' && req.url === '/increasePingPongs') {
         try {
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
