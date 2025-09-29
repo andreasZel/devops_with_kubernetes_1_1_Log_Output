@@ -19,7 +19,7 @@ spec:
             name: logoutput-configmap
         containers:
         - name: logoutput
-          image: zelhs/randomstring:4.1
+          image: EXCERSISES/RANDOM_STRING
           readinessProbe:
             initialDelaySeconds: 10 
             periodSeconds: 5 
