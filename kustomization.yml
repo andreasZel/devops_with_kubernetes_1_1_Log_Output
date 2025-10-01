@@ -5,8 +5,10 @@ resources:
   - ./porsgresServices/PostgresSecret.yml
   - ./porsgresServices/StatefullSetPorsgres.yml
   - ./manifest/ConfigMap.yml
-  - ./manifest/DeploymentPong.yml
   - ./manifest/HttpRoute.yml
+  - ./manifest/Gateway.yml
+  - ./manifest/DeploymentPong.yml
+  - ./manifest/Deployment.yml
   - ./manifest/LogOutputClusterIP.yml
   - ./manifest/PingPongClusterIP.yml
   - ./persistentVolumes/persistentvolume.yaml
@@ -15,6 +17,6 @@ resources:
   
 images:
   - name: EXCERSISES/RANDOM_STRING
-    newName: zelhs/randomstring
+    newName: zelhs/ping-pong-application:4.1.1
   - name: EXCERSISES/PING_PONG
-    newName: zelhs/ping-pong-application
+    newName: zelhs/randomstring:4.1.2
