@@ -51,15 +51,15 @@ const server = http.createServer(async (req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end("OK");
     } else if (req?.method === 'GET' && req.url === '/healthz') {
-        if (dbpool) {
+        try {
+            await dbpool.query('SELECT 1');
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end("OK");
-            return;
+        } catch (err) {
+            console.error("Healthcheck DB failed:", err.message);
+            res.writeHead(500, { 'Content-Type': 'text/plain' });
+            res.end("Error connecting to Db");
         }
-
-        res.writeHead(500, { 'Content-Type': 'text/plain' });
-        res.write(`Error connecting to Db`);
-        res.end("Error connecting to Db");
     } else if (req?.method === 'GET' && req.url === '/increasePingPongs') {
         try {
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);

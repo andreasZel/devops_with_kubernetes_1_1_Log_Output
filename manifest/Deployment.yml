@@ -19,7 +19,7 @@ spec:
             name: logoutput-configmap
         containers:
         - name: logoutput
-          image: EXCERSISES/RANDOM_STRING
+          image: EXCERSISES/PING_PONG
           readinessProbe:
             initialDelaySeconds: 10 
             periodSeconds: 5 

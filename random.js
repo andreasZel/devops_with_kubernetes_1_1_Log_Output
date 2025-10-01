@@ -31,18 +31,19 @@ const server = http.createServer(async (req, res) => {
         res.end("OK");
     } else if (req.method === 'GET' && req.url === '/healthz') {
         try {
-            const pingpong = await fetch('http://ping-pong-svc.exercises:2020/');
+            const pingpong = await fetch('http://ping-pong-svc.exercises:2020/pings');
             if (pingpong.ok) {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
-                res.end('OK');
+                res.end("OK");
                 return;
             }
-
+            console.error("Healthcheck DB failed:", err.message);
             res.writeHead(500, { 'Content-Type': 'text/plain' });
-            res.end('Ping-pong not reachable');
-        } catch (e) {
+            res.end("Error connecting to Db");
+        } catch (err) {
+            console.error("Healthcheck failed:", err.message);
             res.writeHead(500, { 'Content-Type': 'text/plain' });
-            res.end('Ping-pong not reachable');
+            res.end("Error connecting to Db");
         }
     } else if (req?.method === 'GET' && req.url.startsWith('/pingpong')) {
         try {

@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: EXCERSISES/PING_PONG
+          image: EXCERSISES/RANDOM_STRING
           readinessProbe:
             initialDelaySeconds: 10 
             periodSeconds: 5 
