@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  namespace: exercises
+  name: logoutput-rollout
+spec:
+  replicas: 1
+  strategy:
+    canary:
+      steps:
+        - setWeight: 50
+        - pause: {duration: 1m}
+        - analysis:
+            templates:
+            - templateName: cpu-usage-check
+        - setWeight: 100
+  selector:
+    matchLabels:
+      app: logoutput
+  template:
+    metadata:
+      labels:
+        app: logoutput
+    spec:
+      volumes:
+      - name: config-volume
+        configMap:
+          name: logoutput-configmap
+      containers:
+      - name: logoutput
+        image: EXCERSISES/PING_PONG
+        readinessProbe:
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          httpGet:
+            path: /healthz
+            port: 3004
+        volumeMounts:
+          - name: config-volume
+            mountPath: /usr/app/information
+            readOnly: true
