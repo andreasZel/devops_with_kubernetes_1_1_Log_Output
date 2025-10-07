@@ -7,8 +7,9 @@ resources:
   - ./manifest/ConfigMap.yml
   - ./manifest/HttpRoute.yml
   - ./manifest/Gateway.yml
-  - ./manifest/DeploymentPong.yml
-  - ./manifest/Deployment.yml
+  - ./manifest/AnalysisTemplateCPU.yml
+  - ./manifest/RolloutPong.yml
+  - ./manifest/Rollout.yml
   - ./manifest/LogOutputClusterIP.yml
   - ./manifest/PingPongClusterIP.yml
   - ./persistentVolumes/persistentvolume.yaml
