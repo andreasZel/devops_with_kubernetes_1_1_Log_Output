@@ -1,0 +1,60 @@
+name: Build and publish application
+
+on:
+  push:
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_CLUSTER: dwk-cluster
+  GKE_ZONE: europe-west1-b
+  REGISTRY: europe-west1-docker.pkg.dev
+
+jobs:
+  build-publish:
+    name: Build, Push, Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GKE_SA_KEY }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: google-github-actions/setup-gcloud@v2
+
+      - run: gcloud --quiet auth configure-docker $REGISTRY
+
+      - name: 'Get GKE credentials'
+        uses: 'google-github-actions/get-gke-credentials@v2'
+        with:
+          cluster_name: '${{ env.GKE_CLUSTER }}'
+          project_id: '${{ env.PROJECT_ID }}'
+          location: '${{ env.GKE_ZONE }}'
+
+      - name: Build and publish random string
+        run: |-
+          docker build --tag "zelhs/ping-pong-application:$GITHUB_SHA" .
+          docker push "zelhs/ping-pong-application:$GITHUB_SHA"
+      
+      - name: Build and publish ping pong
+        run: |-
+          docker build --tag "zelhs/randomstring:$GITHUB_SHA" .
+          docker push "zelhs/randomstring:$GITHUB_SHA"
+
+      - name: Set up Kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Use right image for random string
+        run: kustomize edit set image EXCERSISES/RANDOM_STRING=zelhs/ping-pong-application:$GITHUB_SHA
+     
+      - name: Use right image for ping pong
+        run: kustomize edit set image EXCERSISES/PING_PONG=zelhs/randomstring:$GITHUB_SHA
+
+      - name: commit kustomization.yaml to GitHub
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: 'kustomization.yaml'
+          message: New version released ${{ github.sha }}
