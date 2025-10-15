@@ -4,7 +4,7 @@ metadata:
   namespace: exercises
   name: logoutput-rollout
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     canary:
       steps:
