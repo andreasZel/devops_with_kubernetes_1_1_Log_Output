@@ -8,6 +8,8 @@ env:
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-west1-b
   REGISTRY: europe-west1-docker.pkg.dev
+  BRANCH: ${{ github.ref_name }}
+  REPOSITORY: my-repository
   
   #image names
   RANDOM_STRING: zelhs/ping-pong-application
