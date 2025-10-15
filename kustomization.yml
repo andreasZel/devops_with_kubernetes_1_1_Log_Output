@@ -1,23 +1,25 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - ./porsgresServices/HeadlessClusterIP.yml
-  - ./porsgresServices/PostgresSecret.yml
-  - ./porsgresServices/StatefullSetPorsgres.yml
-  - ./manifest/ConfigMap.yml
-  - ./manifest/HttpRoute.yml
-  - ./manifest/Gateway.yml
-  - ./manifest/AnalysisTemplateCPU.yml
-  - ./manifest/RolloutPong.yml
-  - ./manifest/Rollout.yml
-  - ./manifest/LogOutputClusterIP.yml
-  - ./manifest/PingPongClusterIP.yml
-  - ./persistentVolumes/persistentvolume.yaml
-  - ./persistentVolumes/persistentvolumeclaim.yaml
+- ./porsgresServices/HeadlessClusterIP.yml
+- ./porsgresServices/PostgresSecret.yml
+- ./porsgresServices/StatefullSetPorsgres.yml
+- ./manifest/ConfigMap.yml
+- ./manifest/HttpRoute.yml
+- ./manifest/Gateway.yml
+- ./manifest/AnalysisTemplateCPU.yml
+- ./manifest/RolloutPong.yml
+- ./manifest/Rollout.yml
+- ./manifest/LogOutputClusterIP.yml
+- ./manifest/PingPongClusterIP.yml
+- ./persistentVolumes/persistentvolume.yaml
+- ./persistentVolumes/persistentvolumeclaim.yaml
 
   
 images:
-  - name: EXCERSISES/RANDOM_STRING
-    newName: zelhs/ping-pong-application:4.1.1
-  - name: EXCERSISES/PING_PONG
-    newName: zelhs/randomstring:4.1.2
+- name: EXCERSISES/PING_PONG
+  newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/randomstring
+  newTag: main-a767590e3d5f20d9ab0f8f5f32c13bdf8ffc9db3
+- name: EXCERSISES/RANDOM_STRING
+  newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/ping-pong-application
+  newTag: main-a767590e3d5f20d9ab0f8f5f32c13bdf8ffc9db3
