@@ -8,6 +8,10 @@ env:
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-west1-b
   REGISTRY: europe-west1-docker.pkg.dev
+  
+  #image names
+  RANDOM_STRING: zelhs/ping-pong-application
+  PING_PONG: zelhs/randomstring
 
 jobs:
   build-publish:
@@ -34,24 +38,30 @@ jobs:
           project_id: '${{ env.PROJECT_ID }}'
           location: '${{ env.GKE_ZONE }}'
 
+      # Form image tags
+      - name: 'Form image names'
+        run: |
+          echo "IMAGE_TAG_RANDOM_STRING=$REGISTRY/$PROJECT_ID/$REPOSITORY/$RANDOM_STRING:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+          echo "IMAGE_TAG_PING_PONG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$PING_PONG:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+
       - name: Build and publish random string
         run: |-
-          docker build --tag "zelhs/ping-pong-application:$GITHUB_SHA" .
-          docker push "zelhs/ping-pong-application:$GITHUB_SHA"
+          docker build -t $IMAGE_TAG_RANDOM_STRING ./PongOutput
+          docker push $IMAGE_TAG_RANDOM_STRING
       
       - name: Build and publish ping pong
         run: |-
-          docker build --tag "zelhs/randomstring:$GITHUB_SHA" .
-          docker push "zelhs/randomstring:$GITHUB_SHA"
+          docker build -t $IMAGE_TAG_PING_PONG .
+          docker push $IMAGE_TAG_PING_PONG
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
       - name: Use right image for random string
-        run: kustomize edit set image EXCERSISES/RANDOM_STRING=zelhs/ping-pong-application:$GITHUB_SHA
+        run: kustomize edit set image EXCERSISES/RANDOM_STRING=$IMAGE_TAG_RANDOM_STRING
      
       - name: Use right image for ping pong
-        run: kustomize edit set image EXCERSISES/PING_PONG=zelhs/randomstring:$GITHUB_SHA
+        run: kustomize edit set image EXCERSISES/PING_PONG=$IMAGE_TAG_PING_PONG
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
