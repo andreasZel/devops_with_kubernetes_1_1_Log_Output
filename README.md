@@ -116,3 +116,24 @@ gcloud container clusters update dwk-cluster --location=europe-west1-b --gateway
 ```
 
 also use the commit code `85b6e486b62227908fa163e05f4b81ddce68fd14` to apply resources.
+
+## update 4.7
+
+We update the deployment approach to GitOps, so you need to install `argocd`
+
+```bash
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+```
+
+also don't forget `argo rollouts` for all deployments to work:
+
+```bash
+kubectl create namespace argo-rollouts
+
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+```
+
+then follow instructions in class module to add the repo from argocd UI that
+is exposed from the load balancer
