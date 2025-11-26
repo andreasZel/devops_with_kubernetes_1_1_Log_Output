@@ -1,0 +1,16 @@
+{
+  "name": "greeter",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Greeter service for log output app",
+  "main": "greeter.js",
+  "scripts": {
+    "start": "node greeter.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}
