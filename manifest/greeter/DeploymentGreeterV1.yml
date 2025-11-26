@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: greeter-v1
+  namespace: default
   labels:
     app: greeter
     version: v1
