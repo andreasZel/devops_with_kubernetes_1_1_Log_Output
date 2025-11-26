@@ -7,7 +7,31 @@ const { Pool } = pkg;
 dotenv.config();
 var logString = '';
 
-// const logPath = path.join(__dirname, 'logs', 'counter.txt');   
+const GREETER_URL = process.env.GREETER_URL || 'http://greeter-svc:3004';
+
+// Helper function to call the greeter service
+async function getGreeting() {
+    try {
+        return new Promise((resolve, reject) => {
+            const url = new URL(GREETER_URL);
+            http.get(url, (res) => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => {
+                    try {
+                        const greeting = JSON.parse(data);
+                        resolve(greeting.message);
+                    } catch (e) {
+                        reject(e);
+                    }
+                });
+            }).on('error', reject);
+        });
+    } catch (err) {
+        console.error('Error calling greeter service:', err.message);
+        return 'Greeting service unavailable';
+    }
+}
 
 async function dbInitAndConnect() {
     var client = null;
@@ -96,13 +120,21 @@ const server = http.createServer(async (req, res) => {
 
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
+            
+            let output = '';
             if (pingsDbResult?.rows?.length === 0) {
-                res.write(`No Ping / Pongs yet`);
+                output = `No Ping / Pongs yet`;
             } else {
                 const counter = pingsDbResult.rows[0]?.counter;
-                logString = `Ping / Pongs: ${counter}`;
-                res.write(logString);
+                output = `Ping / Pongs: ${counter}`;
             }
+
+            // Get greeting from greeter service
+            const greeting = await getGreeting();
+            output += `\n${greeting}`;
+            
+            logString = output;
+            res.write(logString);
 
             res.end();
         } catch (e) {
