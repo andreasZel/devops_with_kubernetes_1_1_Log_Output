@@ -14,6 +14,7 @@ env:
   #image names
   RANDOM_STRING: zelhs/ping-pong-application
   PING_PONG: zelhs/randomstring
+  GREETER: zelhs/greeter
 
 jobs:
   build-publish:
@@ -45,6 +46,7 @@ jobs:
         run: |
           echo "IMAGE_TAG_RANDOM_STRING=$REGISTRY/$PROJECT_ID/$REPOSITORY/$RANDOM_STRING:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
           echo "IMAGE_TAG_PING_PONG=$REGISTRY/$PROJECT_ID/$REPOSITORY/$PING_PONG:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
+          echo "IMAGE_TAG_GREETER=$REGISTRY/$PROJECT_ID/$REPOSITORY/$GREETER:$BRANCH-$GITHUB_SHA" >> $GITHUB_ENV
 
       - name: Build and publish random string
         run: |-
@@ -56,6 +58,11 @@ jobs:
           docker build -t $IMAGE_TAG_PING_PONG .
           docker push $IMAGE_TAG_PING_PONG
 
+      - name: Build and publish greeter
+        run: |-
+          docker build -t $IMAGE_TAG_GREETER ./greeter
+          docker push $IMAGE_TAG_GREETER
+
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v2
 
@@ -64,6 +71,9 @@ jobs:
      
       - name: Use right image for ping pong
         run: kustomize edit set image EXCERSISES/PING_PONG=$IMAGE_TAG_PING_PONG
+
+      - name: Use right image for greeter
+        run: kustomize edit set image EXCERSISES/greeter=$IMAGE_TAG_GREETER
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v9
