@@ -7,7 +7,7 @@ const { Pool } = pkg;
 dotenv.config();
 var logString = '';
 
-const GREETER_URL = process.env.GREETER_URL || 'http://greeter-svc:3004';
+const GREETER_URL = process.env.GREETER_URL || 'http://greeter-svc.default.svc.cluster.local:3004';
 
 // Helper function to call the greeter service
 async function getGreeting() {
