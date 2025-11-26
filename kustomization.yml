@@ -25,10 +25,10 @@ resources:
 images:
 - name: EXCERSISES/PING_PONG
   newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/randomstring
-  newTag: main-b5715c81b2c7d850298f8407eec74ca525f34d1b
+  newTag: main-d483b1695d23e3e5b9a61149c4c55fb8364a76c4
 - name: EXCERSISES/RANDOM_STRING
   newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/ping-pong-application
-  newTag: main-b5715c81b2c7d850298f8407eec74ca525f34d1b
+  newTag: main-d483b1695d23e3e5b9a61149c4c55fb8364a76c4
 - name: EXCERSISES/greeter
   newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/greeter
-  newTag: main-b5715c81b2c7d850298f8407eec74ca525f34d1b
+  newTag: main-d483b1695d23e3e5b9a61149c4c55fb8364a76c4
