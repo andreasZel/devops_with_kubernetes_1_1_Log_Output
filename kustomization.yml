@@ -12,6 +12,12 @@ resources:
 - ./manifest/Rollout.yml
 - ./manifest/LogOutputClusterIP.yml
 - ./manifest/PingPongClusterIP.yml
+- ./manifest/greeter/DeploymentGreeterV1.yml
+- ./manifest/greeter/DeploymentGreeterV2.yml
+- ./manifest/greeter/GreeterService.yml
+- ./manifest/greeter/GreeterServiceV1.yml
+- ./manifest/greeter/GreeterServiceV2.yml
+- ./manifest/greeter/GreeterHTTPRoute.yml
 - ./persistentVolumes/persistentvolume.yaml
 - ./persistentVolumes/persistentvolumeclaim.yaml
 
@@ -22,4 +28,7 @@ images:
   newTag: main-86d39c3233441afa64cff36770fed43c7eab139e
 - name: EXCERSISES/RANDOM_STRING
   newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/ping-pong-application
+  newTag: main-86d39c3233441afa64cff36770fed43c7eab139e
+- name: EXCERSISES/greeter
+  newName: europe-west1-docker.pkg.dev/our-reason-470418-t4/my-repository/zelhs/greeter
   newTag: main-86d39c3233441afa64cff36770fed43c7eab139e
