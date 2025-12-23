@@ -5,8 +5,7 @@ resources:
 - ./porsgresServices/PostgresSecret.yml
 - ./porsgresServices/StatefullSetPorsgres.yml
 - ./manifest/ConfigMap.yml
-- ./manifest/HttpRoute.yml
-- ./manifest/Gateway.yml
+- ./manifest/Ingress.yml
 - ./manifest/AnalysisTemplateCPU.yml
 - ./manifest/RolloutPong.yml
 - ./manifest/Rollout.yml
@@ -17,7 +16,10 @@ resources:
 - ./manifest/greeter/GreeterService.yml
 - ./manifest/greeter/GreeterServiceV1.yml
 - ./manifest/greeter/GreeterServiceV2.yml
-- ./manifest/greeter/GreeterHTTPRoute.yml
+- ./manifest/greeter/GreeterGateway.yml
+- ./manifest/greeter/GreeterVirtualService.yml
+- ./manifest/greeter/GreeterDestinationRuleV1.yml
+- ./manifest/greeter/GreeterDestinationRuleV2.yml
 - ./persistentVolumes/persistentvolume.yaml
 - ./persistentVolumes/persistentvolumeclaim.yaml
 
