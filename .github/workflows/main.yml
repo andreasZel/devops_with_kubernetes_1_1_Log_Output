@@ -7,9 +7,9 @@ env:
   BRANCH: ${{ github.ref_name }}
 
   #image names
-  RANDOM_STRING: zelhs/ping-pong-application
-  PING_PONG: zelhs/randomstring
-  GREETER: zelhs/greeter
+  RANDOM_STRING: ping-pong-application
+  PING_PONG: randomstring
+  GREETER: greeter
 
 jobs:
   build-publish:
