@@ -4,7 +4,7 @@ metadata:
   namespace: exercises
   name: logoutput-ingress
 spec:
-  ingressClassName: gce
+  ingressClassName: nginx
   rules:
   - host: ""
     http:
