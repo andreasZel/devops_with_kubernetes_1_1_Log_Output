@@ -134,6 +134,6 @@ kubectl create namespace argo-rollouts
 
 kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
 ```
-
+ 
 then follow instructions in class module to add the repo from argocd UI that
 is exposed from the load balancer
