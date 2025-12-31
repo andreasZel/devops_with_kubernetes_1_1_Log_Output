@@ -9,6 +9,7 @@ resources:
 - ./manifest/AnalysisTemplateCPU.yml
 - ./manifest/RolloutPong.yml
 - ./manifest/Rollout.yml
+- ./manifest/ingress-gateway.yml
 - ./manifest/LogOutputClusterIP.yml
 - ./manifest/PingPongClusterIP.yml
 - ./manifest/greeter/DeploymentGreeterV1.yml
