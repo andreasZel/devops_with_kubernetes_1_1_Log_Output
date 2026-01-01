@@ -28,10 +28,10 @@ resources:
 images:
 - name: EXCERSISES/PING_PONG
   newName: zelhs/randomstring
-  newTag: main-78bc3466327c9da91f2709b2f2937268e8ae6d26
+  newTag: main-c7a0262d396348213ccf75538b05c94af60067ce
 - name: EXCERSISES/RANDOM_STRING
   newName: zelhs/ping-pong-application
-  newTag: main-78bc3466327c9da91f2709b2f2937268e8ae6d26
+  newTag: main-c7a0262d396348213ccf75538b05c94af60067ce
 - name: EXCERSISES/greeter
   newName: zelhs/greeter
-  newTag: main-78bc3466327c9da91f2709b2f2937268e8ae6d26
+  newTag: main-c7a0262d396348213ccf75538b05c94af60067ce
