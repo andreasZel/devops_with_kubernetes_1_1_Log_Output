@@ -4,10 +4,8 @@ metadata:
   namespace: exercises
   name: logoutput-ingress
 spec:
-  ingressClassName: nginx
   rules:
-  - host: ""
-    http:
+  - http:
       paths:
       - path: /increasePingPongs
         pathType: Prefix
