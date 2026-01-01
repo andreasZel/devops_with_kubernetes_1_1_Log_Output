@@ -137,3 +137,43 @@ kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/rele
  
 then follow instructions in class module to add the repo from argocd UI that
 is exposed from the load balancer
+
+## update 5.3
+
+My GKE free trial expired, so i had to change things to work with k3d.
+
+You need to install `arocd` and `argorollouts` as previously mentioned and in addition `istio` and `kiali` that is needed for this exercise:
+
+First we install `istio`, `it's gateway` and `promitheus plug-in`:
+
+```bash
+#istio setup
+helm repo add istio https://istio-release.storage.googleapis.com/charts
+
+helm repo update
+
+helm install istio-base istio/base -n istio-system --set defaultRevision=default --create-namespace
+
+helm install istiod istio/istiod -n istio-system --wait
+
+helm install istio-ingressgateway istio/gateway --namespace istio-system
+
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.28/samples/addons/prometheus.yaml
+
+#kiali setup
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.28/samples/addons/kiali.yaml
+```
+
+to view kiali we just port-forward and access from web url. It won't show any network traffic unless we call the ping-pong service.
+
+Because I made Virtual service and gateways only for greeter we need to update ping-pong and logoutput using `istio-injection`:
+
+```bash
+kubectl label namespace exercises istio-injection=enabled --overwrite
+```
+
+after that we restart or delete the pods and the network traffic will be detected by istio.
+
+we can see the kiali diagram here:
+
+![kiali diagram](./assets/Exercise5-3devopswithkubernetes.png)
