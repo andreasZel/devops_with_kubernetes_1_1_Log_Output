@@ -149,7 +149,7 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.SERVER_PORT || 8080;
 server.listen(PORT, () => {
     console.log(`Started Server on Port ${PORT}`);
 })
