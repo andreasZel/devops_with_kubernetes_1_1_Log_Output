@@ -19,13 +19,13 @@ resources:
 images:
 - name: EXCERSISES/PING_PONG
   newName: zelhs/randomstring
-  newTag: main-1757667148e4d35c6675af290ff12ee4db07232f
+  newTag: main-4c752caca39fd683ea05ca06e5b23fca34c2bbf7
 - name: EXCERSISES/RANDOM_STRING
   newName: zelhs/ping-pong-application
-  newTag: main-1757667148e4d35c6675af290ff12ee4db07232f
+  newTag: main-4c752caca39fd683ea05ca06e5b23fca34c2bbf7
 - name: EXCERSISES/greeter
   newName: zelhs/greeter
-  newTag: main-1757667148e4d35c6675af290ff12ee4db07232f
+  newTag: main-4c752caca39fd683ea05ca06e5b23fca34c2bbf7
 - name: EXERCISES/GET_STRING_SERVER
   newName: zelhs/get-string-server
-  newTag: main-1757667148e4d35c6675af290ff12ee4db07232f
+  newTag: main-4c752caca39fd683ea05ca06e5b23fca34c2bbf7
