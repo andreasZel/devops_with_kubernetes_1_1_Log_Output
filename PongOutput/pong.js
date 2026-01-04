@@ -7,7 +7,7 @@ const { Pool } = pkg;
 dotenv.config();
 var logString = '';
 
-const GREETER_URL = process.env.GREETER_URL || 'http://greeter-svc.default.svc.cluster.local:3004';
+const GREETER_URL = process.env.GREETER_URL || 'http://greeter.exercises.svc.cluster.local';
 
 // Helper function to call the greeter service
 async function getGreeting() {
@@ -76,6 +76,12 @@ const server = http.createServer(async (req, res) => {
         res.end("OK");
     } else if (req?.method === 'GET' && req.url === '/healthz') {
         try {
+            if (!dbpool) {
+                console.error("Database pool not initialized");
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end("Database not available");
+                return;
+            }
             await dbpool.query('SELECT 1');
             res.writeHead(200, { 'Content-Type': 'text/plain' });
             res.end("OK");
@@ -86,6 +92,11 @@ const server = http.createServer(async (req, res) => {
         }
     } else if (req?.method === 'GET' && req.url === '/increasePingPongs') {
         try {
+            if (!dbpool) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end("Database not available");
+                return;
+            }
             const pingsDbResult = await dbpool.query(`SELECT counter from pingcounter`);
             res.writeHead(200, { 'Content-Type': 'text/plain' });
 
@@ -106,6 +117,11 @@ const server = http.createServer(async (req, res) => {
             //     console.log(`File written successfully in ${logPath}!`);
             // });
 
+            if (!dbpool) {
+                res.writeHead(500, { 'Content-Type': 'text/plain' });
+                res.end("Database not available");
+                return;
+            }
             res.end();
         } catch (e) {
             console.log(e);
