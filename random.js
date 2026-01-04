@@ -31,7 +31,7 @@ const server = http.createServer(async (req, res) => {
         res.end("OK");
     } else if (req.method === 'GET' && req.url === '/healthz') {
         try {
-            const pingpong = await fetch('http://ping-pong.exercises.svc.cluster.local/healthz');
+            const pingpong = await fetch('http://logoutput-svc.exercises.svc.cluster.local/healthz');
             if (pingpong.ok) {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end("OK");
