@@ -1,0 +1,34 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  namespace: exercises
+  name: get-string-server
+spec:
+  template:
+    metadata:
+      labels:
+        app: get-string-server
+    spec:
+      containers:
+        - name: get-string-server
+          image: EXERCISES/GET_STRING_SERVER
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+          livenessProbe:
+            httpGet:
+              path: /getString
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /getString
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+  traffic:
+    - percent: 100
+      latestRevision: true

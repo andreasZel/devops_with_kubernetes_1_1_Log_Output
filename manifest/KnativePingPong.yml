@@ -1,22 +1,9 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: serving.knative.dev/v1
+kind: Service
 metadata:
   namespace: exercises
-  name: ping-pong-rollout
+  name: ping-pong
 spec:
-  replicas: 1
-  strategy:
-    canary:
-      steps:
-        - setWeight: 50
-        - pause: {duration: 1m}
-        - analysis:
-            templates:
-            - templateName: cpu-usage-check
-        - setWeight: 100
-  selector:
-    matchLabels:
-      app: ping-pong
   template:
     metadata:
       labels:
@@ -24,14 +11,12 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: EXCERSISES/RANDOM_STRING
-          readinessProbe:
-            initialDelaySeconds: 10
-            periodSeconds: 5
-            httpGet:
-              path: /healthz
-              port: 3003
+          image: EXERCISES/RANDOM_STRING
+          ports:
+            - containerPort: 8080
           env:
+            - name: PORT
+              value: "8080"
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
@@ -57,3 +42,22 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_DB
+            - name: GREETER_URL
+              value: http://greeter.exercises.svc.cluster.local:8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      # Allow longer grace period for database operations
+      timeoutSeconds: 300
+  traffic:
+    - percent: 100
+      latestRevision: true

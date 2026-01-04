@@ -5,22 +5,14 @@ resources:
 - ./porsgresServices/PostgresSecret.yml
 - ./porsgresServices/StatefullSetPorsgres.yml
 - ./manifest/ConfigMap.yml
+- ./manifest/KnativeGetStringServer.yml
+- ./manifest/KnativePingPong.yml
 - ./manifest/Ingress.yml
 - ./manifest/AnalysisTemplateCPU.yml
-- ./manifest/RolloutPong.yml
 - ./manifest/Rollout.yml
 - ./manifest/ingress-gateway.yml
 - ./manifest/LogOutputClusterIP.yml
-- ./manifest/PingPongClusterIP.yml
-- ./manifest/greeter/DeploymentGreeterV1.yml
-- ./manifest/greeter/DeploymentGreeterV2.yml
-- ./manifest/greeter/GreeterService.yml
-- ./manifest/greeter/GreeterServiceV1.yml
-- ./manifest/greeter/GreeterServiceV2.yml
-- ./manifest/greeter/GreeterGateway.yml
-- ./manifest/greeter/GreeterVirtualService.yml
-- ./manifest/greeter/GreeterDestinationRuleV1.yml
-- ./manifest/greeter/GreeterDestinationRuleV2.yml
+- ./manifest/greeter/KnativeGreeter.yml
 - ./persistentVolumes/persistentvolume.yaml
 - ./persistentVolumes/persistentvolumeclaim.yaml
 
