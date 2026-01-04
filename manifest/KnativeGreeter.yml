@@ -1,0 +1,36 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  namespace: exercises
+  name: greeter
+spec:
+  template:
+    metadata:
+      labels:
+        app: greeter
+    spec:
+      containers:
+        - name: greeter
+          image: EXCERSISES/greeter
+          ports:
+            - containerPort: 8080
+          env:
+            - name: PORT
+              value: "8080"
+            - name: GREETER_VERSION
+              value: "v1"
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+  traffic:
+    - percent: 100
+      latestRevision: true

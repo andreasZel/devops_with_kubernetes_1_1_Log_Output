@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
         - name: ping-pong
-          image: EXERCISES/RANDOM_STRING
+          image: EXCERSISES/PING_PONG
           ports:
             - containerPort: 8080
           env:
