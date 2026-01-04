@@ -29,7 +29,8 @@ const server = http.createServer(async (req, res) => {
     }
 });
 
-server.listen(3000, () => {
-    console.log('Started Server on Port 3000');
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+    console.log(`Started Server on Port ${PORT}`);
 })
 

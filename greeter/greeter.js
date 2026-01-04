@@ -6,7 +6,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const VERSION = process.env.GREETER_VERSION || 'v1';
-const PORT = 3004;
+const PORT = process.env.PORT || 8080;
 
 const greetings = {
   v1: 'Greeter v1',
