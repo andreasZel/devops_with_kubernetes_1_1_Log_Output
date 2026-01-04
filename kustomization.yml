@@ -10,7 +10,6 @@ resources:
 - ./manifest/Ingress.yml
 - ./manifest/AnalysisTemplateCPU.yml
 - ./manifest/Rollout.yml
-- ./manifest/ingress-gateway.yml
 - ./manifest/LogOutputClusterIP.yml
 - ./manifest/greeter/KnativeGreeter.yml
 - ./persistentVolumes/persistentvolume.yaml
