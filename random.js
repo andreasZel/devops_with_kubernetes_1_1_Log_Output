@@ -31,7 +31,7 @@ const server = http.createServer(async (req, res) => {
         res.end("OK");
     } else if (req.method === 'GET' && req.url === '/healthz') {
         try {
-            const pingpong = await fetch('http://ping-pong-svc.exercises:2020/pings');
+            const pingpong = await fetch('http://ping-pong.exercises.svc.cluster.local:8080/healthz');
             if (pingpong.ok) {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end("OK");
@@ -47,7 +47,7 @@ const server = http.createServer(async (req, res) => {
         }
     } else if (req?.method === 'GET' && req.url.startsWith('/pingpong')) {
         try {
-            const pings = await fetch('http://ping-pong-svc.exercises:2020/pings');
+            const pings = await fetch('http://ping-pong.exercises.svc.cluster.local:8080/pings');
             const pingsText = await pings.text();
             const infoText = await fs.readFile(logPath, 'utf8');
             var infoMessageParsed = '';
