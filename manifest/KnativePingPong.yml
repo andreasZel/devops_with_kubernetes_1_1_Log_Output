@@ -44,18 +44,6 @@ spec:
                   key: POSTGRES_DB
             - name: GREETER_URL
               value: http://greeter.exercises.svc.cluster.local
-          livenessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /healthz
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 5
       # Allow longer grace period for database operations
       timeoutSeconds: 300
   traffic:

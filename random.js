@@ -29,22 +29,6 @@ const server = http.createServer(async (req, res) => {
     if (req?.method === 'GET' && req.url === '/') {
         res.writeHead(200, { 'Content-Type': 'text/plain' });
         res.end("OK");
-    } else if (req.method === 'GET' && req.url === '/healthz') {
-        try {
-            const pingpong = await fetch('http://logoutput-svc.exercises.svc.cluster.local/healthz');
-            if (pingpong.ok) {
-                res.writeHead(200, { 'Content-Type': 'text/plain' });
-                res.end("OK");
-                return;
-            }
-            console.error("Healthcheck DB failed:", err.message);
-            res.writeHead(500, { 'Content-Type': 'text/plain' });
-            res.end("Error connecting to Db");
-        } catch (err) {
-            console.error("Healthcheck failed:", err.message);
-            res.writeHead(500, { 'Content-Type': 'text/plain' });
-            res.end("Error connecting to Db");
-        }
     } else if (req?.method === 'GET' && req.url.startsWith('/pingpong')) {
         try {
             const pings = await fetch('http://ping-pong.exercises.svc.cluster.local/pings');
