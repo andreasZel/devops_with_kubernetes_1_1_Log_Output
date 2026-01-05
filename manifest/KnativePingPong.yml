@@ -14,6 +14,10 @@ spec:
           image: EXCERSISES/PING_PONG
           ports:
             - containerPort: 8080
+          volumeMounts:
+            - name: config-volume
+              mountPath: /usr/app/information
+              readOnly: true
           env:
             - name: SERVER_PORT
               value: "8080"
@@ -46,6 +50,10 @@ spec:
               value: http://greeter.exercises.svc.cluster.local
       # Allow longer grace period for database operations
       timeoutSeconds: 300
+      volumes:
+        - name: config-volume
+          configMap:
+            name: logoutput-configmap
   traffic:
     - percent: 100
       latestRevision: true
