@@ -9,8 +9,7 @@ resources:
 - ./manifest/KnativePingPong.yml
 - ./manifest/Ingress.yml
 - ./manifest/AnalysisTemplateCPU.yml
-- ./manifest/Rollout.yml
-- ./manifest/LogOutputClusterIP.yml
+- ./manifest/KnativeLogoutput.yml
 - ./manifest/greeter/KnativeGreeter.yml
 - ./persistentVolumes/persistentvolume.yaml
 - ./persistentVolumes/persistentvolumeclaim.yaml
