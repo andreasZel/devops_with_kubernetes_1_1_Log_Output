@@ -7,7 +7,7 @@ const { Pool } = pkg;
 dotenv.config();
 var logString = '';
 
-const GREETER_URL = process.env.GREETER_URL || 'http://greeter.exercises.sslip.io';
+const GREETER_URL = process.env.GREETER_URL || 'http://greeter.exercises.svc.cluster.local';
 
 // Helper function to call the greeter service
 async function getGreeting() {
