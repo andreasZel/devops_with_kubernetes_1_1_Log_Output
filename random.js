@@ -31,7 +31,7 @@ const server = http.createServer(async (req, res) => {
         res.end("OK");
     } else if (req?.method === 'GET' && req.url.startsWith('/pingpong')) {
         try {
-            const pings = await fetch('http://logoutput.exercises.svc.cluster.local/pingpong');
+            const pings = await fetch('http://logoutput.exercises.svc.cluster.local/pings');
             const pingsText = await pings.text();
             const infoText = await fs.readFile(logPath, 'utf8');
             var infoMessageParsed = '';
